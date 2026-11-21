@@ -73,6 +73,18 @@ def run_similarity_test(filename, semantic_descriptors, similarity_fn):
         # using the semantic descriptors stored in semantic_descriptors and the similarity function similarity_fn.
     f = open(filename, "r", encoding="latin-1")
     correct = 0
+    f = f.replace(",", "\n")
+    f = f.replace("—", "\n")
+    f = f.replace(":", "\n")
+    f = f.replace(";", "\n")
+    f = f.replace("(", "\n")    
+    f = f.replace(")", "\n")
+    f = f.replace("'", "\n")
+    f = f.replace('"', "\n")
+    f = f.replace("-", "\n")
+    f = f.replace("!", "\n")
+    f = f.replace("?", "\n")
+    f = f.replace(".", "\n")
     words = f.split("\n")
     word_count = 0
     for word in words:
