@@ -72,7 +72,6 @@ def run_similarity_test(filename, semantic_descriptors, similarity_fn):
     # returns the percentage (i.e., float between 0.0 and 100.0) of questions on which most_similar_word() guesses the answer correctly 
         # using the semantic descriptors stored in semantic_descriptors and the similarity function similarity_fn.
     f = open(filename, "r", encoding="latin-1")
-    correct = 0
     f = f.replace(",", "\n")
     f = f.replace("—", "\n")
     f = f.replace(":", "\n")
@@ -85,13 +84,19 @@ def run_similarity_test(filename, semantic_descriptors, similarity_fn):
     f = f.replace("!", "\n")
     f = f.replace("?", "\n")
     f = f.replace(".", "\n")
-    words = f.split("\n")
+    total_words = f.split("\n")
+    
+    word_dict = build_semantic_descriptors_from_files(total_words)
     word_count = 0
-    for word in words:
+    correct_count = 0
+    for word in total_words:
         word_count += 1
-        if most_similar_word(words[word], choices, semantic_descriptors, similarity_fn) == # HOW DO WE KNOW IF THE ANSWER IS CORRECT?
-            correct += 1
-    percentage_correct = float((correct/word_count)*100)
+        correct_word = word_dict[word][0] # the first word has the highest freq so it's correct
+        if most_similar_word(total_words[word], choices, semantic_descriptors, similarity_fn) == correct_word:
+            correct_count += 1
+        else:
+            continue
+    percentage_correct = float((correct_count/word_count)*100)
     return percentage_correct
 
 if __name__ == "__main__":
