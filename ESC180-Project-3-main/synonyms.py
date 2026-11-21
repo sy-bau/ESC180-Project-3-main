@@ -49,8 +49,8 @@ def build_semantic_descriptors_from_files(filenames):
     # This function takes in a list containing lists of strings (words) representing sentences 
     # returns a dictionary d: for every word w that appears in at least one of the sentences
     d = {}
-    for filename in filenames:
-       text = open(filenames[filename], "r", encoding="latin-1").read()
+    for i in range(len(filenames)):
+       text = open(filenames[i], "r", encoding="latin-1").read()
        text = text.replace("!", ".")
        text = text.replace("?", ".") # make everything a period so we can split on periods
        sentences = text.split(".") # split on periods to get sentences
@@ -85,7 +85,7 @@ def run_similarity_test(filename, semantic_descriptors, similarity_fn):
     f = f.replace("?", "\n")
     f = f.replace(".", "\n")
     total_words = f.split("\n")
-    
+
     word_dict = build_semantic_descriptors_from_files(total_words)
     word_count = 0
     correct_count = 0
