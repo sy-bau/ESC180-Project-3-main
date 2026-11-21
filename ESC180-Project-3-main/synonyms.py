@@ -52,9 +52,9 @@ def build_semantic_descriptors_from_files(filenames):
     for filename in filenames:
        text = open(filenames[filename], "r", encoding="utf-8").read()
        text = text.replace("!", ".")
-       text = text.replace("?", ".")
-       sentences = text.split(".")
-       build_semantic_descriptors([sentence.split() for sentence in sentences])
+       text = text.replace("?", ".") # make everything a period so we can split on periods
+       sentences = text.split(".") # split on periods to get sentences
+       build_semantic_descriptors([sentence.split() for sentence in sentences]) # apply build_semantic_descriptors to the list of sentences
     return d
 
 def most_similar_word(word, choices, semantic_descriptors, similarity_fn):
