@@ -4,7 +4,8 @@ Author: Michael Guerzhoy. Last modified: Nov. 20, 2023.
 '''
 
 import math
-
+    # test test is this actually syncing
+    # john pls delete if yes
 
 def norm(vec):
     '''Return the norm of a vector stored as a dictionary, as
