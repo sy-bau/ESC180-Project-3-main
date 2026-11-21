@@ -50,7 +50,7 @@ def build_semantic_descriptors_from_files(filenames):
     # returns a dictionary d: for every word w that appears in at least one of the sentences
     d = {}
     for filename in filenames:
-       text = open(filenames[filename], "r", encoding="utf-8").read()
+       text = open(filenames[filename], "r", encoding="latin-1").read()
        text = text.replace("!", ".")
        text = text.replace("?", ".") # make everything a period so we can split on periods
        sentences = text.split(".") # split on periods to get sentences
@@ -71,6 +71,16 @@ def run_similarity_test(filename, semantic_descriptors, similarity_fn):
     # takes in a string filename which is the name of a file in the same format as test.txt
     # returns the percentage (i.e., float between 0.0 and 100.0) of questions on which most_similar_word() guesses the answer correctly 
         # using the semantic descriptors stored in semantic_descriptors and the similarity function similarity_fn.
+    f = open(filename, "r", encoding="latin-1")
+    correct = 0
+    words = f.split("\n")
+    word_count = 0
+    for word in words:
+        word_count += 1
+        if most_similar_word(words[word], choices, semantic_descriptors, similarity_fn) == # HOW DO WE KNOW IF THE ANSWER IS CORRECT?
+            correct += 1
+    percentage_correct = float((correct/word_count)*100)
+    return percentage_correct
 
 if __name__ == "__main__":
     print(cosine_similarity({"a": 1, "b": 2, "c": 3},
