@@ -48,9 +48,14 @@ def build_semantic_descriptors(sentences):
 def build_semantic_descriptors_from_files(filenames):
     # This function takes in a list containing lists of strings (words) representing sentences 
     # returns a dictionary d: for every word w that appears in at least one of the sentences
-    # d[w] is itself a dictionary which represents the semantic descriptor of w 
-    # note: the variable names here are arbitrary
-
+    d = {}
+    for filename in filenames:
+       text = open(filenames[filename], "r", encoding="utf-8").read()
+       text = text.replace("!", ".")
+       text = text.replace("?", ".")
+       sentences = text.split(".")
+       build_semantic_descriptors([sentence.split() for sentence in sentences])
+    return d
 
 def most_similar_word(word, choices, semantic_descriptors, similarity_fn):
     similar_list = []
