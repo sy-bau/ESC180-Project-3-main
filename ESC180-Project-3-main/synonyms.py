@@ -86,7 +86,7 @@ def run_similarity_test(filename, semantic_descriptors, similarity_fn):
     f = f.replace(".", "\n")
     total_words = f.split("\n")
 
-    word_dict = build_semantic_descriptors_from_files(total_words)
+    word_dict = build_semantic_descriptors(total_words)
     word_count = 0
     correct_count = 0
     for word in total_words:
